@@ -1,0 +1,58 @@
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header { 
+    justify-content: center;
+}
+main
+ {
+    display: grid;
+    grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+    grid-gap: 5px;
+    width: 80vw;
+    height: auto;
+    aspect-ratio: 1;
+    
+ }
+
+ #play { 
+    grid-column: 4 / span 2;
+    grid-row: 4 / span 2;
+    color: white;
+    background-color: black;
+    border-radius: 50%;
+    border: 5px solid white;
+ }
+
+ #red { 
+    grid-column: 2 / span 3;
+    grid-row: 2 /span 3;
+    background-color: red;
+    border-radius: 320px 20px 20px 20px;
+ }
+
+ #green { 
+    grid-column: 5 / span 3;
+    grid-row: 5 /span 3;
+    background-color: green;
+    border-radius: 20px 20px 320px 20px;
+ }
+
+ #blue { 
+    grid-column: 5 / span 3;
+    grid-row: 2 /span 3;
+    background-color: blue;
+    border-radius: 20px 320px 20px 20px;
+ }
+
+ #yellow { 
+    grid-column: 2 / span 3;
+    grid-row: 5 /span 3;
+    background-color: yellow;
+    border-radius: 20px 20px 20px 320px;
+ }

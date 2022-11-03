@@ -3,7 +3,7 @@
 
 2. Simons turn
     2.2 - randomly picks a index from array of four colors
-    2.3 - plays the audio for that color and animates the div with that colour
+    2.3 - plays the audio for that color and changes the div with that colour to a brighter color
     2.4 - enables divs to be clicked for user response 
     2.5 - user cannot respond until simon is done 
 
@@ -12,14 +12,14 @@
     3.2 - event listeners on the divs 
     3.3 - order of clicks is recorded 
     3.4 - user click order is compared to computer click order
-        3.4.1 - if order is same, then level++ and score++ 
-        3.4.2 - if order is different, then game over, restart, level = 1, score = 0 
-        (3.4.2 (alternate) - if order is different, replay simons turn, user gets another turn)
+        3.4.1 - if order is same, then win indicator, level++ and score++, simons turn, 
+        3.4.2 - if order is different, then game over indicator, Initialize
+        (3.4.2 - if order is different, replay simons turn, user gets another turn)
 
 4. Initialize Game 
     4.1 - level = 1
     4.2 - score = 0 
     4.3 - simon's array becomes null 
     4.4 - users's array becomes null 
-    
+
 
