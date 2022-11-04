@@ -13,6 +13,7 @@
     3.3 - order of clicks is recorded 
     3.4 - user click order is compared to computer click order
         3.4.1 - if order is same, then win indicator, level++ and score++, simons turn, 
+        (3.4.1 - check current score with high score, if highscore less than score, highscore = current score)
         3.4.2 - if order is different, then game over indicator, Initialize
         (3.4.2 - if order is different, replay simons turn, user gets another turn)
 
@@ -21,5 +22,7 @@
     4.2 - score = 0 
     4.3 - simon's array becomes null 
     4.4 - users's array becomes null 
+    
+5. reset high score button to reset high score
 
 

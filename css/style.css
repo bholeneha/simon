@@ -1,23 +1,36 @@
-
-
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-header { 
-    justify-content: center;
-}
-main
- {
     display: grid;
-    grid-template: repeat(8, 1fr) / repeat(8, 1fr);
-    grid-gap: 5px;
-    width: 80vw;
-    height: auto;
+    grid-template-rows: 20% 60% 20%;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-areas:  
+        ". header ." 
+        ". main ." 
+        ". . .";
+    background-color: rgb(95, 95, 95);
+    width: 100vw;
+    height: 100vh;
+}
+
+header { 
+    grid-area: header;
+    justify-self: center;
+    align-self: center;
+}
+
+header>h1 {
+    text-align: center;
+}
+
+main {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    justify-self: center;
     aspect-ratio: 1;
-    
+    display: grid;
+    grid-template: repeat(8, 11.5%) / repeat(8, 11.5%);
+    grid-gap: 5px;
  }
 
  #play { 
@@ -26,33 +39,33 @@ main
     color: white;
     background-color: black;
     border-radius: 50%;
-    border: 5px solid white;
+    border: 5px solid rgba(95, 95, 95, 0.8);
  }
 
  #red { 
     grid-column: 2 / span 3;
     grid-row: 2 /span 3;
-    background-color: red;
+    background-color: darkred;
     border-radius: 320px 20px 20px 20px;
  }
 
  #green { 
     grid-column: 5 / span 3;
     grid-row: 5 /span 3;
-    background-color: green;
+    background-color: darkgreen;
     border-radius: 20px 20px 320px 20px;
  }
 
  #blue { 
     grid-column: 5 / span 3;
     grid-row: 2 /span 3;
-    background-color: blue;
+    background-color: darkblue;
     border-radius: 20px 320px 20px 20px;
  }
 
  #yellow { 
     grid-column: 2 / span 3;
     grid-row: 5 /span 3;
-    background-color: yellow;
+    background-color: rgb(144, 144, 23);
     border-radius: 20px 20px 20px 320px;
  }
