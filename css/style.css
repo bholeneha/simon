@@ -1,14 +1,22 @@
+:root {
+   --bd-around: 10px ridge rgba(161, 161, 161, 0.5);
+   --bd-cell: 10px ridge rgba(26, 26, 26, 0.5);
+   --cell-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
 body {
-    display: grid;
-    grid-template-rows: 20% 60% 20%;
-    grid-template-columns: 20% 60% 20%;
-    grid-template-areas:  
+   display: grid;
+   grid-template-rows: 20% 60% 20%;
+   grid-template-columns: 15% 70% 15%;
+   grid-template-areas:  
         ". header ." 
         ". main ." 
         ". . .";
-    background-color: rgb(95, 95, 95);
-    width: 100vw;
-    height: 100vh;
+   justify-items: center;
+
+   background-color: rgb(147, 147, 147);
+   width: 100vw;
+   height: 100vh;
 }
 
 header { 
@@ -19,18 +27,37 @@ header {
 
 header>h1 {
     text-align: center;
+    color: rgb(249, 227, 60);
+    text-shadow: 3px 3px 5px rgb(62, 45, 1);
+    letter-spacing: 5px;
+    font-size: 60px;
+}
+
+#stats {
+   grid-area: main;
+   justify-self: stretch;
+   justify-items: right;
+   border: var(--bd-around);
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
 }
 
 main {
-    grid-row-start: 2;
-    grid-row-end: 3;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    justify-self: center;
+    grid-area: main;
     aspect-ratio: 1;
     display: grid;
-    grid-template: repeat(8, 11.5%) / repeat(8, 11.5%);
-    grid-gap: 5px;
+    grid-template: repeat(8, 12.5%) / repeat(8, 12.5%);
+ }
+
+ #simon-wrapper {
+   grid-column: 2 / 8;
+   grid-row: 2 / 8;
+   justify-content: stretch;
+   border: 50px ridge rgba(26, 26, 26, 0.291);
+   border-radius: 70%;
+   background-color:#000000af;
+   color: blanchedalmond;
  }
 
  #play { 
@@ -39,15 +66,35 @@ main {
     color: white;
     background-color: black;
     border-radius: 50%;
-    border: 5px solid rgba(95, 95, 95, 0.8);
+    border: var(--bd-cell);
+    /* box-shadow: 4px 4px 5px #000000; */
+    /* box-shadow: 1px 1px 2px black, 0 0 25px rgb(61, 61, 61), 0 0 5px rgb(106, 106, 106); */
+    box-shadow: rgba(34, 34, 34, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+ }
+
+ .color-button {
+   border: var(--bd-around);
+   border-top: var(--bd-cell);
+   border-left: var(--bd-cell);
+   box-shadow: var(--cell-shadow); 
+   transition: all .10s ease;
+   z-index: -1;
+   filter: brightness(40%);
  }
 
  #red { 
     grid-column: 2 / span 3;
     grid-row: 2 /span 3;
     background-color: darkred;
-    border-radius: 320px 20px 20px 20px;
+    border-radius: 320px 20px 20px 20px;  
  }
+
+ #blue { 
+   grid-column: 5 / span 3;
+   grid-row: 2 /span 3;
+   background-color: darkblue;
+   border-radius: 20px 320px 20px 20px;
+}
 
  #green { 
     grid-column: 5 / span 3;
@@ -56,16 +103,16 @@ main {
     border-radius: 20px 20px 320px 20px;
  }
 
- #blue { 
-    grid-column: 5 / span 3;
-    grid-row: 2 /span 3;
-    background-color: darkblue;
-    border-radius: 20px 320px 20px 20px;
- }
-
  #yellow { 
     grid-column: 2 / span 3;
     grid-row: 5 /span 3;
     background-color: rgb(144, 144, 23);
     border-radius: 20px 20px 20px 320px;
  }
+
+.playing {
+   filter: brightness(90%);
+   transform: scale(1.1);
+   z-index: -1;
+}
+ 
