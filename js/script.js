@@ -11,32 +11,27 @@ const colorCells = {
 /*----- app's state (variables) -----*/
 
 const simon = {
-    newNum: null,
     playOrder: [],
-    isTurn: true,
-    time: 5000
 }
 
 const player = {
     playOrder: [],
-    score: null,
-    isTurn: false,
     highScore: null
 }
 
-let level, score, turn
+let level, score;
 /*----- cached element references -----*/
 const simonEl = document.getElementById('simon')
 const playBtn = document.getElementById('play')
 const levelEl = document.getElementById('level')
 const scoreEl = document.getElementById('score')
+const colorDivs = document.querySelectorAll('.color-button')
 
 /*----- event listeners -----*/
 playBtn.addEventListener('click', playSimon)
 
 /*----- functions -----*/
 function playSimon(){
-    turn = 0
 
     level = 0
     levelEl.textContent = `Level : ${level}`
@@ -48,7 +43,7 @@ function playSimon(){
     simon.playOrder = [];
     player.playOrder = [];
 
-    console.log('play simon func is working')
+    // console.log('play simon func is working')
 
     simonsTurn()
 }
@@ -57,37 +52,84 @@ function simonsTurn(){
     
     let num = Math.floor(Math.random()*4+1)
     simon.playOrder.push(colorCells[num])
-    console.log(simon.playOrder)
+    // console.log(simon.playOrder)
     playAnimation(simon.playOrder, 0)
 
-    turn++
     
     setTimeout(playersTurn, simon.playOrder.length*2000)
 }
 
 function playersTurn(){
-    simonEl.addEventListener('click', function(e) {
-        console.log(e.target.id)
-        for(i=0; i<simon.playOrder.length; i++){
-            if (e.target.id === simon){
-                console.log('That is correct')
-            } else {
-                console.log('try again')
-            }
-        }
+
+    // console.log(simon.playOrder.length)
+
+    hasWon = false;
+    isCorrect = false;
+    player.playOrder= [];
+
+    for (i=0; i<simon.playOrder.length; i++){
+        let divToListenFor = simon.playOrder[i]
+        console.log('this is where player input is checked')
         
-    })
+        simonEl.addEventListener('click', function(e) {
+            if (e.target.id === divToListenFor){
+                console.log('That is correct' + e.target.id)
+                let colorClicked = e.target
+                player.playOrder.push(colorClicked.id)
+                console.log(`This is where ${colorClicked} was added to ${player.playOrder}`)
+                colorClicked.classList.add('playing')
+                // End animation for the div
+                setTimeout( function(){
+                    e.target.classList.remove('playing')
+                }, 500)
+                isCorrect = true
+
+                if(i==(simon.playOrder.length-1)){
+                    hasWon = true
+                }
+
+            } else {
+                console.log('Game Over!')
+                //LOST INDICATOR ANIMATION
+                isCorrect = false
+                gameOver()
+            }
+        })
+        if(!isCorrect){break;};
+    }
 
 
-    //Update Level, Score, Turn variables. 
-    turn = ++turn%2
-    level++
-    levelEl.textContent = `Level : ${level}`
-    score+=10
-    scoreEl.textContent = `Score : ${score}`
-    setTimeout (simonsTurn, simon.playOrder.length*2000)
+
+    setTimeout(levelUp, simon.playOrder.length*3000)
 }
 
+
+function levelUp(){
+    if(hasWon){
+        //WIN
+        //Update Level, Score
+        level++
+        levelEl.textContent = `Level : ${level}`
+        score+=10
+        scoreEl.textContent = `Score : ${score}`
+        //WIN INDICATOR ANIMATION
+        levelUpAnimation()
+
+        //Back to Simons Turn
+        setTimeout (simonsTurn, simon.playOrder.length*3000)
+    } 
+}
+
+function gameOver() {
+    gameOverAnimation()
+
+    level = 0;
+    score = 0;
+    simon.playOrder = [];
+    player.playOrder = [];
+}
+
+/*----- All Animation Functions Go Here -----*/
 
 function playAnimation(arr, i){
     let animate = setInterval(
@@ -120,26 +162,46 @@ function playAnimation(arr, i){
       , 1000)
 }
 
-// function playerTurn(e) {
-//     if (e.target.id===`${simon.playOrder[0]}`){
-//         console.log(`that is correct`)
-//         player.playOrder.push(e.target.id)
-//         e.target.classList.add('playing')
+function levelUpAnimation() {
+    let animate = setInterval( function(){
+        
+        //Exit cb after 3 intervals
+        if (i==3) {
+            clearInterval(animate)
+        }
 
-//         //Store the click in player.playOrder
-//         player.playOrder.push(e.target.id)
+        colorDivs.forEach((div) => {
+            //Start animation for the color button
+            div.classList.add('playing')
+            //Play audio for the button
+            
+            //End animation for the color button
+            setTimeout(function(){
+            div.classList.remove('playing')
+            }, 100)
+        })
+        i++;
+    }, 200
+)}
 
-//         //Add playing class to div to animate it
-//         e.target.classList.add('playing')
+function gameOverAnimation(){
+    let animate = setInterval( function(){
+        
+        //Exit cb after 3 intervals
+        if (i==3) {
+            clearInterval(animate)
+        }
 
-//         //End animation for the div
-//         setTimeout( function(){
-//             e.target.classList.remove('playing')
-//         }, 300)
-
-//     } else {
-//         console.log(`try again!`)
-//     }
-
-// }
-// 
+        colorDivs.forEach((div) => {
+            //Start animation for the color button
+            div.classList.add('gameover')
+            //Play audio for the button
+            
+            //End animation for the color button
+            setTimeout(function(){
+            div.classList.remove('gameover')
+            }, 100)
+        })
+        i++;
+    }, 200
+)}

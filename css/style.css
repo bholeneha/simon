@@ -123,5 +123,10 @@ main {
    z-index: 9;
 }
 
+.gameover {
+   filter: brightness(10%);
+   transform: scale(0.8);
+   z-index: 9;
+}
 
  
