@@ -19,7 +19,8 @@ const player = {
     highScore: null
 }
 
-let level, score;
+let level, score, hasClicked;
+
 /*----- cached element references -----*/
 const simonEl = document.getElementById('simon')
 const playBtn = document.getElementById('play')
@@ -33,6 +34,9 @@ playBtn.addEventListener('click', playSimon)
 /*----- functions -----*/
 function playSimon(){
 
+    playBtn.childNodes.forEach(child => {child.classList.add('disabled'); console.log(child.classList)})
+    playBtn.disabled = true
+    
     level = 0
     levelEl.textContent = `Level : ${level}`
 
@@ -49,52 +53,67 @@ function playSimon(){
 }
 
 function simonsTurn(){
-    
+
+    //Setting players array to empty  
+    player.playOrder = []
+
+    //Adding next color to Simon's array
     let num = Math.floor(Math.random()*4+1)
     simon.playOrder.push(colorCells[num])
-    // console.log(simon.playOrder)
+
+    //Animating Simon's array
     playAnimation(simon.playOrder, 0)
 
-    
-    setTimeout(playersTurn, simon.playOrder.length*2000)
+    player.playOrder= [];
+    setTimeout(playersTurn, simon.playOrder.length*800)
 }
 
 function playersTurn(){
+    hasClicked = false;
 
-    hasWon = false;
-    isCorrect = null;
-    player.playOrder= [];
-
-    simonEl.addEventListener('click', function(e) {
-        console.log(e.target.id)
-        let colorClicked = e.target
-        // player.playOrder.push(`${colorClicked.id}`)
-        let index = player.playOrder.push(colorClicked.id)-1
-        console.log(`This is where ${colorClicked.id} was added to:`)
-        console.log(player.playOrder)
-        console.log(`at ${(index)}`)
-        colorClicked.classList.add('playing')
-            // End animation for the div
-            setTimeout( function(){
-                e.target.classList.remove('playing')
-            }, 500)
-        
-        setTimeout(checkClick.bind(undefined, index), 5000)
-    })
-
+    //Event Listener is added so user can play their turn
+    simonEl.addEventListener('click', checkClick)
     
+    if(hasClicked==true){simonEl.removeEventListener('click', checkClick)}
+
+    //User gets 5 seconds to click or game over
+    if(hasClicked = false){
+        setTimeout(gameOver, 5000)
+    }
 }
 
-function checkClick(idx) {
-        console.log(`This is being run now`)
-        console.log(player.playOrder[idx])
-        console.log(simon.playOrder[idx])
 
-        if (player.playOrder[idx] === simon.playOrder[idx]){
+
+function checkClick(e) {
+    console.log(`Check click started running`)
+    let colorClicked = e.target
+    let idx = player.playOrder.push(colorClicked.id)-1
+    console.log(`This is where ${colorClicked.id} was added to:`)
+    console.log(player.playOrder)
+    console.log(`at ${(idx)}`)
+    colorClicked.classList.add('playing')
+        // End animation for the div
+        setTimeout( function(){
+            e.target.classList.remove('playing')
+        }, 500)
+    
+    hasClicked = true;
+    console.log(player.playOrder[idx])
+    console.log(simon.playOrder[idx])
+
+    if (player.playOrder[idx] === simon.playOrder[idx]){
+        if(player.playOrder.length === simon.playOrder.length){
+            console.log(`Level up from checkClick if`)
             levelUp()
         } else {
-            gameOver()
+            console.log(`Re playersTurn from checkClick if`)
+            playersTurn()
         }
+    } else {
+        console.log(`Game Over from checkClick if`)
+        gameOver()
+    }
+    console.log(`Check click stopped running`)
 }
 
 function levelUp(){
@@ -114,6 +133,7 @@ function levelUp(){
 }
 
 function gameOver() {
+
     //LOSE INDICATOR ANIMATION
     gameOverAnimation()
 
@@ -127,6 +147,8 @@ function gameOver() {
     simon.playOrder = [];
     player.playOrder = [];
     console.log(`GAME OVER`);
+    playBtn.disabled = false;
+
 }
 
 /*----- All Animation Functions Go Here -----*/
@@ -160,7 +182,7 @@ function playAnimation(arr, i){
           
           i++
         }
-      , 1000)
+      , 700)
 }
 
 //Animation for Level Up 
@@ -174,6 +196,7 @@ function levelUpAnimation() {
             clearInterval(animate)
         }
 
+        console.log(`level up animation ran`)
         colorDivs.forEach((div) => {
             //Start animation for the color button
             div.classList.add('playing')
@@ -191,7 +214,7 @@ function levelUpAnimation() {
 //Animation for Game Over
 function gameOverAnimation(){
     i = 0
-    
+
     let animateGameOver = setInterval( function(){
        
 
@@ -200,6 +223,7 @@ function gameOverAnimation(){
             clearInterval(animateGameOver)
         }
 
+        console.log('game over animation ran')
         colorDivs.forEach((div) => {
             //Start animation for the color button
             div.classList.add('gameover')

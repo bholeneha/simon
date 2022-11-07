@@ -72,11 +72,9 @@ main {
     z-index: 10;
  }
 
- #play>h3, #play>p{
-   background-image: linear-gradient(to left, violet, green, yellow, orange, red);
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent;
- }
+ /* #play>h3, #play>p{
+   color: rgb(249, 227, 60);
+ } */
 
  
  .color-button {
@@ -129,4 +127,6 @@ main {
    z-index: 9;
 }
 
- 
+#play:disabled {
+   color: grey;
+}
