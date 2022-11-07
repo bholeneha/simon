@@ -68,73 +68,70 @@ function playersTurn(){
     simonEl.addEventListener('click', function(e) {
         console.log(e.target.id)
         let colorClicked = e.target
-        player.playOrder.push(`${colorClicked.id}`)
+        // player.playOrder.push(`${colorClicked.id}`)
+        let index = player.playOrder.push(colorClicked.id)-1
         console.log(`This is where ${colorClicked.id} was added to:`)
         console.log(player.playOrder)
+        console.log(`at ${(index)}`)
         colorClicked.classList.add('playing')
             // End animation for the div
             setTimeout( function(){
                 e.target.classList.remove('playing')
             }, 500)
+        
+        setTimeout(checkClick.bind(undefined, index), 5000)
     })
 
+    
+}
 
-    let clickCheck = setTimeout(function(){
-        if (player.playOrder.length == 0){
-            console.log(`Too slow. You need to respond within 5 seconds`)
-        }
+function checkClick(idx) {
+        console.log(`This is being run now`)
+        console.log(player.playOrder[idx])
+        console.log(simon.playOrder[idx])
 
-        if (player.playOrder.length == simon.playOrder.length){
-            
-            for(i=0; i<=player.playOrder.length; i++){
-                if(i=player.playOrder.length && isCorrect){
-                    //level uop
-                    levelUp()
-                }else{
-                    //game over and reset
-                    gameOverAnimation()
-                    gameOver()
-                }
-                if(player.playOrder[i] == simon.playOrder[i]){
-                    console.log(`${i} index is the same`)
-                    //win indicator 
-                    isCorrect = true
-                } else {
-                    isCorrect = false
-                    //lose indicator
-                }
-            }
+        if (player.playOrder[idx] === simon.playOrder[idx]){
+            levelUp()
+        } else {
+            gameOver()
         }
-    }, 5000)
 }
 
 function levelUp(){
-    if(hasWon){
-        //WIN
+    // if(hasWon){
+        //WIN INDICATOR ANIMATION
+        levelUpAnimation()
+
         //Update Level, Score
         level++
         levelEl.textContent = `Level : ${level}`
         score+=10
         scoreEl.textContent = `Score : ${score}`
-        //WIN INDICATOR ANIMATION
-        levelUpAnimation()
-
+        
         //Back to Simons Turn
         setTimeout (simonsTurn, 2000)
-    } 
+    // } 
 }
 
 function gameOver() {
+    //LOSE INDICATOR ANIMATION
     gameOverAnimation()
+
+    //RESET LEVEL AND SCORE 
     level = 0;
+    levelEl.textContent = ``
     score = 0;
+    scoreEl.textContent = ``
+    
+    //Empty Simons Array and Players Array 
     simon.playOrder = [];
     player.playOrder = [];
-    console.log(`gameOver func is being called now`)
+    console.log(`GAME OVER`);
 }
 
 /*----- All Animation Functions Go Here -----*/
 
+//Animation for Simon's turn
 function playAnimation(arr, i){
     let animate = setInterval(
         function(){
@@ -166,9 +163,12 @@ function playAnimation(arr, i){
       , 1000)
 }
 
+//Animation for Level Up 
 function levelUpAnimation() {
+    i = 0
     let animate = setInterval( function(){
         
+
         //Exit cb after 3 intervals
         if (i==3) {
             clearInterval(animate)
@@ -188,9 +188,13 @@ function levelUpAnimation() {
     }, 200
 )}
 
+//Animation for Game Over
 function gameOverAnimation(){
+    i = 0
+    
     let animateGameOver = setInterval( function(){
-        
+       
+
         //Exit cb after 3 intervals
         if (i==3) {
             clearInterval(animateGameOver)
