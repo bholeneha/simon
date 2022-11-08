@@ -35,6 +35,7 @@ const scoreEl = document.getElementById('score')
 const colorDivs = document.querySelectorAll('.color-button')
 const messageEl = document.getElementById('messages')
 
+
 /*----- event listeners -----*/
 playBtn.addEventListener('click', playSimon)
 messageEl.innerHTML = "Click <h2>Simon</h2> to Play!"
