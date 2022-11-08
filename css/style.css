@@ -6,11 +6,12 @@
 
 body {
    display: grid;
-   grid-template-rows: 20% 60% 20%;
+   grid-template-rows: 20% 60% 15% 5%;
    grid-template-columns: 15% 70% 15%;
    grid-template-areas:  
         ". header ." 
         ". main ." 
+        ". messages ."
         ". footer .";
    justify-items: center;
    background-color:#191b1d;
@@ -35,6 +36,15 @@ header>h1 {
     font-size: 60px;
     font-weight: 700;
 }
+#enter-exit {
+   grid-area: main;
+   border: 2px outset rgb(249, 227, 60);
+}
+
+#enter{
+   color: rgb(249, 227, 60);
+   background-color: black; 
+}
 
 #stats {
    grid-area: main;
@@ -45,7 +55,7 @@ header>h1 {
 }
 
 #messages{ 
-   grid-area: footer;
+   grid-area: messages;
    align-self: start;
    justify-self: center;
    text-align: center;
@@ -53,7 +63,7 @@ header>h1 {
    font-size: 70%;
 }
 
-main {
+#simon {
     grid-area: main;
     aspect-ratio: 1;
     display: grid;

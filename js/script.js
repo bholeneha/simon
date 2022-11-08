@@ -28,20 +28,44 @@ const highScores = JSON.parse(localStorage.getItem("highScoreData")) ?? [];
 let level, score, hasClicked;
 
 /*----- cached element references -----*/
+
+//divs
 const simonEl = document.getElementById('simon')
+const enterEl = document.getElementById('enter-exit')
+
+//Buttons
 const playBtn = document.getElementById('play')
+const enterBtn = document.getElementById('enter')
+
+//Stats Elements
+const statsEl = document.getElementById('stats')
 const levelEl = document.getElementById('level')
 const scoreEl = document.getElementById('score')
+
+//Simon Divs
 const colorDivs = document.querySelectorAll('.color-button')
 const messageEl = document.getElementById('messages')
 
+/*----- Enter Screen State -----*/
 
-/*----- event listeners -----*/
+
+/*----- Enter Screen Event Listeners -----*/
+enterBtn.addEventListener('click', enterPlayScreen)
+
+
+/*----- Enter Screen Functions -----*/
+function enterPlayScreen(e){
+
+
+
+}
+
+
+/*----- Play Screen Event Listeners -----*/
 playBtn.addEventListener('click', playSimon)
 messageEl.innerHTML = "Click <h2>Simon</h2> to Play!"
 
-
-/*----- functions -----*/
+/*----- Play Screen Functions -----*/
 function playSimon(){
 
     //Play button disabled
