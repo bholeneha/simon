@@ -8,17 +8,23 @@ const colorCells = {
     4: 'yellow'
 }
 
-/*----- app's state (variables) -----*/
-
 const simon = {
     playOrder: [],
 }
 
 const player = {
+    name: "",
     playOrder: [],
     highScore: null
 }
 
+//Number of high scores to display
+const numOfHighScores = 5;
+
+//Using nullish coalescing operator to return an empty array if highScoreData doesnt exist in local storage
+const highScores = JSON.parse(localStorage.getItem("highScoreData")) ?? [];
+
+/*----- app's state (variables) -----*/
 let level, score, hasClicked;
 
 /*----- cached element references -----*/
@@ -95,7 +101,6 @@ function playersTurn(){
 }
 
 
-
 function checkClick(e) {
 
     //Check to see if user clicked the right child elements 
@@ -161,6 +166,15 @@ function levelUp(){
 }
 
 function gameOver(){
+
+    //Saving score as high score or the current player
+    if (player.highScore<score || player.highScore == null){
+        player.highScore = score
+    }
+    
+    let newHighScore = {name:player.name, highScore:player.highScore}
+
+    checkHighScore(newHighScore, highScores)
 
     //LOSE INDICATOR ANIMATION
     gameOverAnimation()
@@ -270,3 +284,33 @@ function gameOverAnimation(){
         i++;
     }, 300
 )}
+
+/*----- High Score Related -----*/
+
+function checkHighScore(newScore, highScoreList){
+    
+    //Using the Elvis operator and nullish operator to get the lowest score. 
+    //If undefined, set to zero
+    const lowestScore = highScores[numOfHighScores-1]?.score ?? 0;
+
+    if (newScore.highScore>lowestScore){
+        saveHighScore(newScore, highScoreList);
+        // showHighScores(); //TODO
+    }
+}
+
+function saveHighScore(score, scoreList){
+
+    //ADD to the list
+    scoreList.push(score);
+
+    //SORT the list
+    scoreList.sort((a,b) => b.highScore - a.highScore);
+
+    //Select new list 
+    scoreList.splice(numOfHighScores)
+
+    //Save to Local Storage
+    localStorage.setItem('highScoresData', JSON.stringify(scoreList));
+}
+
