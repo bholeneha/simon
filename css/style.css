@@ -6,17 +6,18 @@
 
 body {
    display: grid;
-   grid-template-rows: 20% 70% 10%;
+   grid-template-rows: 20% 60% 20%;
    grid-template-columns: 15% 70% 15%;
    grid-template-areas:  
         ". header ." 
         ". main ." 
-        ". . .";
+        ". footer .";
    justify-items: center;
    background-color:#191b1d;
    width: 100vw;
    height: 100vh;
    font-family: 'Syncopate', sans-serif;
+   font-weight: 700;
    color:rgb(249, 227, 60);
 }
 
@@ -32,7 +33,7 @@ header>h1 {
     text-shadow: 3px 3px 5px rgb(116, 83, 0);
     letter-spacing: 7px;
     font-size: 60px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 #stats {
@@ -44,9 +45,12 @@ header>h1 {
 }
 
 #messages{ 
-   grid-area: main;
-   align-self: end;
+   grid-area: footer;
+   align-self: start;
    justify-self: center;
+   text-align: center;
+   font-weight: 400;
+   font-size: 35%;
 }
 
 main {
@@ -76,6 +80,7 @@ main {
     box-shadow: var(--cell-shadow);
     z-index: 10;
     font-family: 'Syncopate', sans-serif;
+    font-weight: 700;
  }
  
  .color-button {
@@ -130,4 +135,19 @@ main {
 
 #play:disabled {
    color: grey;
+}
+
+footer{
+   font-family:Arial, Helvetica, sans-serif;
+   font-size: small;
+   font-weight: 100;
+   grid-area: footer;
+   align-self: end;
+   justify-self: center;
+   color: rgb(107, 112, 88)
+}
+
+footer>a{
+   color: rgb(157, 158, 112);
+   text-decoration: none;
 }
