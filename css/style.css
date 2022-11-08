@@ -1,22 +1,23 @@
 :root {
-   --bd-around: 10px ridge rgba(161, 161, 161, 0.5);
-   --bd-cell: 10px ridge rgba(26, 26, 26, 0.5);
+   --bd-around: 15px ridge rgba(161, 161, 161, 0.5);
+   --bd-cell: 15px ridge rgba(75, 75, 75, 0.5);
    --cell-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 body {
    display: grid;
-   grid-template-rows: 20% 60% 20%;
+   grid-template-rows: 20% 70% 10%;
    grid-template-columns: 15% 70% 15%;
    grid-template-areas:  
         ". header ." 
         ". main ." 
         ". . .";
    justify-items: center;
-
-   background-color: rgb(147, 147, 147);
+   background-color:#191b1d;
    width: 100vw;
    height: 100vh;
+   font-family: 'Syncopate', sans-serif;
+   color:rgb(249, 227, 60);
 }
 
 header { 
@@ -28,7 +29,7 @@ header {
 header>h1 {
     text-align: center;
     color: rgb(249, 227, 60);
-    text-shadow: 3px 3px 5px rgb(62, 45, 1);
+    text-shadow: 3px 3px 5px rgb(116, 83, 0);
     letter-spacing: 7px;
     font-size: 60px;
     font-weight: 600;
@@ -38,7 +39,6 @@ header>h1 {
    grid-area: main;
    justify-self: stretch;
    justify-items: right;
-   border: var(--bd-around);
    display: flex;
    flex-direction: column;
    align-items: flex-end;
@@ -58,24 +58,20 @@ main {
    border: 50px ridge rgba(26, 26, 26, 0.291);
    border-radius: 70%;
    background-color:#000000af;
-   color: blanchedalmond;
  }
 
  #play { 
     grid-column: 4 / span 2;
     grid-row: 4 / span 2;
-    color: rgb(255, 255, 255);
+    color:rgb(249, 227, 60);
+    font-size: large;
     background-color: black;
     border-radius: 50%;
     border: var(--bd-cell);
     box-shadow: var(--cell-shadow);
     z-index: 10;
+    font-family: 'Syncopate', sans-serif;
  }
-
- /* #play>h3, #play>p{
-   color: rgb(249, 227, 60);
- } */
-
  
  .color-button {
    border: var(--bd-around);
