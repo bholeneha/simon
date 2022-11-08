@@ -27,9 +27,12 @@ const playBtn = document.getElementById('play')
 const levelEl = document.getElementById('level')
 const scoreEl = document.getElementById('score')
 const colorDivs = document.querySelectorAll('.color-button')
+const messageEl = document.getElementById('messages')
 
 /*----- event listeners -----*/
 playBtn.addEventListener('click', playSimon)
+messageEl.textContent = "Click Simon to Play!"
+
 
 /*----- functions -----*/
 function playSimon(){
@@ -52,6 +55,8 @@ function playSimon(){
 
 function simonsTurn(){
 
+    messageEl.textContent = "Simon turn. Watch and remember the order."
+
     console.log(`Simon plays out his array`)
     //Adding next color to Simon's array
     let num = Math.floor(Math.random()*4+1)
@@ -63,10 +68,13 @@ function simonsTurn(){
     //Setting players array to empty  
     player.playOrder = []
 
-    setTimeout(playersTurn, simon.playOrder.length*800)
+    setTimeout(playersTurn, simon.playOrder.length*1200)
 }
 
 function playersTurn(){
+
+    messageEl.innerHTML = "Your turn. Click the colors to copy Simon. <br> (You have 5 seconds to respond)"
+
     hasClicked = false;
 
     //Event Listener is added so user can play their turn
@@ -121,6 +129,7 @@ function checkClick(e) {
 
 function levelUp(){
     // if(hasWon){
+        messageEl.textContent = "Woohoo. Great job!"
         //WIN INDICATOR ANIMATION
         levelUpAnimation()
 
@@ -136,6 +145,7 @@ function levelUp(){
 }
 
 function gameOver() {
+    
 
     console.log(`Game over started running`)
 
@@ -157,6 +167,10 @@ function gameOver() {
     //Play Button Reset
     playBtn.disabled = false;
     console.log(`game over stopped running`)
+
+    setTimeout(function(){
+        messageEl.textContent = "Click Simon to Play!"
+    }, 1500)
 }
 
 /*----- All Animation Functions Go Here -----*/
@@ -186,11 +200,11 @@ function playAnimation(arr, i){
           //End animation for the color button
           setTimeout( function(){
             divToAnimate.classList.remove('playing')
-          }, 500)
+          }, 700)
           
           i++
         }
-      , 700)
+      , 1000)
 }
 
 //Animation for Level Up 
@@ -230,6 +244,7 @@ function gameOverAnimation(){
             clearInterval(animateGameOver)
         }
 
+        messageEl.textContent = "Uh oh. Game over. Restarting..."
         console.log('game over animation ran')
         colorDivs.forEach((div) => {
             //Start animation for the color button

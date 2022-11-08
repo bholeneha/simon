@@ -38,10 +38,15 @@ header>h1 {
 #stats {
    grid-area: main;
    justify-self: stretch;
-   justify-items: right;
    display: flex;
    flex-direction: column;
    align-items: flex-end;
+}
+
+#messages{ 
+   grid-area: main;
+   align-self: end;
+   justify-self: center;
 }
 
 main {
