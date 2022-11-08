@@ -204,7 +204,7 @@ function playAnimation(arr, i){
           
           i++
         }
-      , 1000)
+      , 700)
 }
 
 //Animation for Level Up 
