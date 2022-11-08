@@ -50,7 +50,7 @@ header>h1 {
    justify-self: center;
    text-align: center;
    font-weight: 400;
-   font-size: 35%;
+   font-size: 70%;
 }
 
 main {
@@ -122,14 +122,14 @@ main {
  }
 
 .playing {
-   filter: brightness(90%);
-   transform: scale(1.1);
+   filter: brightness(95%);
+   transform: scale(1.2);
    z-index: 9;
 }
 
 .gameover {
    filter: brightness(10%);
-   transform: scale(0.8);
+   transform: scale(0.75);
    z-index: 9;
 }
 
@@ -139,12 +139,12 @@ main {
 
 footer{
    font-family:Arial, Helvetica, sans-serif;
-   font-size: small;
-   font-weight: 100;
    grid-area: footer;
    align-self: end;
    justify-self: center;
-   color: rgb(107, 112, 88)
+   color: rgb(107, 112, 88);
+   font-size: 20%;
+   font-weight: 100;
 }
 
 footer>a{

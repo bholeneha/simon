@@ -31,7 +31,7 @@ const messageEl = document.getElementById('messages')
 
 /*----- event listeners -----*/
 playBtn.addEventListener('click', playSimon)
-messageEl.innerHTML = "Click <strong>Simon</strong> to Play!"
+messageEl.innerHTML = "Click <h2>Simon</h2> to Play!"
 
 
 /*----- functions -----*/
@@ -55,7 +55,7 @@ function playSimon(){
 function simonsTurn(){
 
     //Message to user to wait for Simon to finish
-    messageEl.innerHTML = "<strong>Simon turn!</strong> <br><br> Wait, watch and remember the order."
+    messageEl.innerHTML = "<h2>Simon's turn!</h2> <br><br> Wait, watch and remember the order."
 
     //Adding next color to Simon's array
     let num = Math.floor(Math.random()*4+1)
@@ -69,13 +69,13 @@ function simonsTurn(){
     player.playOrder = []
 
     //Triggering players turn after certain time 
-    setTimeout(playersTurn, simon.playOrder.length*1200)
+    setTimeout(playersTurn, simon.playOrder.length*1100)
 }
 
 function playersTurn(){
 
     //Message to user to respond
-    messageEl.innerHTML = "<strong> Your turn! </strong> <br><br> Click the colors to copy Simon. <br>(You have 5 seconds to respond)"
+    messageEl.innerHTML = "<h2>Your turn! </h2> <br><br> Click the colors to copy Simon. <br><br>(You have 5 seconds to respond)"
 
     //Flag to see if user has clicked 
     hasClicked = false;
@@ -88,6 +88,7 @@ function playersTurn(){
         if(hasClicked==true){
             simonEl.removeEventListener('click', checkClick)
         } else {
+            simonEl.removeEventListener('click', checkClick)
             gameOver();
         }
     }, 5000)
@@ -121,11 +122,13 @@ function checkClick(e) {
             if(player.playOrder.length === simon.playOrder.length){
 
                 //LEVEL UP
+                simonEl.removeEventListener('click', checkClick)
                 levelUp()
-
+            
             } else {
 
                 //Return to Players Turn for next click
+                simonEl.removeEventListener('click', checkClick)
                 playersTurn()
             }
         
@@ -134,6 +137,7 @@ function checkClick(e) {
 
             //Game Over
             gameOver()
+            simonEl.removeEventListener('click', checkClick)
         }
     }
 }
@@ -141,7 +145,7 @@ function checkClick(e) {
 function levelUp(){
 
     //Message to the user for correct response and level up
-    messageEl.textContent = "Woohoo. Great job!"
+    messageEl.innerHTML = "<h2>Correct!</h2><br><br> Great job!"
 
     //WIN INDICATOR ANIMATION
     levelUpAnimation()
@@ -176,7 +180,7 @@ function gameOver(){
 
     //After a sec and and a half, initialize user message to original 
     setTimeout(function(){
-        messageEl.innerHTML = "Click <strong>Simon</strong> to Play!"
+        messageEl.innerHTML = "Click <h2>Simon</h2> to Play!"
     }, 1500)
 }
 
@@ -209,7 +213,7 @@ function playAnimation(arr, i){
           
           i++
         }
-      , 700)
+      , 800)
 }
 
 //Animation for Level Up 
@@ -245,12 +249,12 @@ function gameOverAnimation(){
        
 
         //Exit cb after 3 intervals
-        if (i>=5) {
+        if (i>=3) {
             clearInterval(animateGameOver)
         }
 
         //Message to user for game over while game over animation
-        messageEl.innerHTML = "Uh oh. <strong>GAME OVER.</strong> <br><br> Restarting..."
+        messageEl.innerHTML = "Uh oh. <h2>GAME OVER.</h2> <br><br> Restarting..." 
 
         //Animation of the color buttons
         colorDivs.forEach((div) => {
@@ -261,8 +265,8 @@ function gameOverAnimation(){
             //End animation for the color button
             setTimeout(function(){
             div.classList.remove('gameover')
-            }, 100)
+            }, 200)
         })
         i++;
-    }, 200
+    }, 300
 )}
