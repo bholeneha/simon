@@ -1,9 +1,23 @@
+/* CSS Variables */
 :root {
    --bd-around: 15px ridge rgba(161, 161, 161, 0.5);
    --bd-cell: 15px ridge rgba(75, 75, 75, 0.5);
    --cell-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+   --font: 'Syncopate', sans-serif;
 }
 
+/* Animations */
+@keyframes heading-animation {
+   from{
+      grid-area: main;
+   }
+   to {
+      grid-area: header;
+   }
+}
+
+
+/* Body Styles */
 body {
    display: grid;
    grid-template-rows: 20% 60% 15% 5%;
@@ -17,35 +31,73 @@ body {
    background-color:#191b1d;
    width: 100vw;
    height: 100vh;
-   font-family: 'Syncopate', sans-serif;
+   font-family: var(--font);
    font-weight: 700;
    color:rgb(249, 227, 60);
 }
 
-header { 
-    grid-area: header;
+/* Header Styles */
+#heading { 
     justify-self: center;
     align-self: center;
+    animation-name: heading-animation;
+    animation-duration: 5s;
 }
 
-header>h1 {
+#heading>h1 {
     text-align: center;
     color: rgb(249, 227, 60);
-    text-shadow: 3px 3px 5px rgb(116, 83, 0);
+    text-shadow: 4px 4px 6px rgb(179, 131, 11);
     letter-spacing: 7px;
     font-size: 60px;
     font-weight: 700;
 }
+
+/* Enter Screen Styles */
 #enter-exit {
    grid-area: main;
    border: 2px outset rgb(249, 227, 60);
+   justify-self: stretch;
+   align-self: stretch;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
 }
 
+#enter-exit>p {
+   margin: 3% 10%;
+}
+
+#input-name {
+   font-size: small;
+   font-weight: 400;
+   margin: 0 10%;
+}
+#name {
+   color:rgb(249, 227, 60);
+   background-color: black;
+   width: fit-content;
+   font-size: medium;
+   margin: 2%;
+   padding: 2%;
+}
 #enter{
+   font-family: var(--font);
    color: rgb(249, 227, 60);
-   background-color: black; 
+   font-size: large;
+   background-color: black;
+   font-weight: 700;
+   text-align: center;
+   display: block;
+   width: fit-content;
+   margin: 2%;
+   padding: 1%;
+   justify-self: flex-end;
 }
 
+/* Stats Element Styles */
 #stats {
    grid-area: main;
    justify-self: stretch;
@@ -63,20 +115,12 @@ header>h1 {
    font-size: 70%;
 }
 
+/* Simon/Play Screen Styles */
 #simon {
     grid-area: main;
     aspect-ratio: 1;
     display: grid;
     grid-template: repeat(8, 12.5%) / repeat(8, 12.5%);
- }
-
- #simon-wrapper {
-   grid-column: 2 / 8;
-   grid-row: 2 / 8;
-   justify-content: stretch;
-   border: 50px ridge rgba(26, 26, 26, 0.291);
-   border-radius: 70%;
-   background-color:#000000af;
  }
 
  #play { 
@@ -131,6 +175,24 @@ header>h1 {
     border-radius: 20px 20px 20px 320px;
  }
 
+/* Footer Styles */
+footer{
+   font-family:Arial, Helvetica, sans-serif;
+   grid-area: footer;
+   align-self: end;
+   justify-self: center;
+   color: rgb(107, 112, 88);
+   font-size: 20%;
+   font-weight: 100;
+}
+
+footer>a{
+   color: rgb(157, 158, 112);
+   text-decoration: none;
+}
+
+
+/* Optional Classes */
 .playing {
    filter: brightness(95%);
    transform: scale(1.2);
@@ -147,17 +209,7 @@ header>h1 {
    color: grey;
 }
 
-footer{
-   font-family:Arial, Helvetica, sans-serif;
-   grid-area: footer;
-   align-self: end;
-   justify-self: center;
-   color: rgb(107, 112, 88);
-   font-size: 20%;
-   font-weight: 100;
+.hidden{
+   visibility: hidden;
 }
 
-footer>a{
-   color: rgb(157, 158, 112);
-   text-decoration: none;
-}

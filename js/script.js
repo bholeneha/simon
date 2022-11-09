@@ -29,7 +29,10 @@ let level, score, hasClicked;
 
 /*----- cached element references -----*/
 
-//divs
+//Heading
+const headingEl = document.getElementById('heading')
+
+//Divs
 const simonEl = document.getElementById('simon')
 const enterEl = document.getElementById('enter-exit')
 
@@ -46,7 +49,9 @@ const scoreEl = document.getElementById('score')
 const colorDivs = document.querySelectorAll('.color-button')
 const messageEl = document.getElementById('messages')
 
+
 /*----- Enter Screen State -----*/
+enterEl.prepend(headingEl)
 
 
 /*----- Enter Screen Event Listeners -----*/
@@ -55,6 +60,22 @@ enterBtn.addEventListener('click', enterPlayScreen)
 
 /*----- Enter Screen Functions -----*/
 function enterPlayScreen(e){
+
+    //Header element moves to top
+    enterEl.removeChild(headingEl)
+    document.querySelector('body').prepend(headingEl)
+    headingEl.style.gridArea = 'header'
+
+
+    //Hide and show relevant elements
+    enterEl.classList.add('hidden')
+    statsEl.classList.remove('hidden')
+    messageEl.classList.remove('hidden')
+    simonEl.classList.remove('hidden')
+
+
+
+    player.name = document.getElementById('name').value
 
 
 
@@ -100,7 +121,7 @@ function simonsTurn(){
     player.playOrder = []
 
     //Triggering players turn after certain time 
-    setTimeout(playersTurn, simon.playOrder.length*1100)
+    setTimeout(playersTurn, simon.playOrder.length*1000)
 }
 
 function playersTurn(){
@@ -248,11 +269,11 @@ function playAnimation(arr, i){
           //End animation for the color button
           setTimeout( function(){
             divToAnimate.classList.remove('playing')
-          }, 700)
+          }, 500)
           
           i++
         }
-      , 800)
+      , 700)
 }
 
 //Animation for Level Up 
@@ -288,7 +309,7 @@ function gameOverAnimation(){
        
 
         //Exit cb after 3 intervals
-        if (i>=3) {
+        if (i===3) {
             clearInterval(animateGameOver)
         }
 
@@ -304,10 +325,10 @@ function gameOverAnimation(){
             //End animation for the color button
             setTimeout(function(){
             div.classList.remove('gameover')
-            }, 200)
+            }, 100)
         })
         i++;
-    }, 300
+    }, 200
 )}
 
 /*----- High Score Related -----*/
