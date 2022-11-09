@@ -7,15 +7,14 @@
 }
 
 /* Animations */
-@keyframes heading-animation {
+/* @keyframes heading-animation {
    from{
       grid-area: main;
    }
    to {
       grid-area: header;
    }
-}
-
+} */
 
 /* Body Styles */
 body {
@@ -37,7 +36,8 @@ body {
 }
 
 /* Header Styles */
-#heading { 
+#heading {
+    grid-area: main;
     justify-self: center;
     align-self: center;
     animation-name: heading-animation;
@@ -48,13 +48,13 @@ body {
     text-align: center;
     color: rgb(249, 227, 60);
     text-shadow: 4px 4px 6px rgb(179, 131, 11);
-    letter-spacing: 7px;
-    font-size: 60px;
+    letter-spacing: 10px;
+    font-size: 50px;
     font-weight: 700;
 }
 
 /* Enter Screen Styles */
-#enter-exit {
+#enter-screen {
    grid-area: main;
    border: 2px outset rgb(249, 227, 60);
    justify-self: stretch;
@@ -66,7 +66,7 @@ body {
    align-items: center;
 }
 
-#enter-exit>p {
+#enter-screen>p {
    margin: 3% 10%;
 }
 
@@ -75,6 +75,7 @@ body {
    font-weight: 400;
    margin: 0 10%;
 }
+
 #name {
    color:rgb(249, 227, 60);
    background-color: black;
@@ -82,7 +83,10 @@ body {
    font-size: medium;
    margin: 2%;
    padding: 2%;
+   font-family: var(--font);
+   text-align: center;
 }
+
 #enter{
    font-family: var(--font);
    color: rgb(249, 227, 60);
@@ -127,7 +131,6 @@ body {
     grid-column: 4 / span 2;
     grid-row: 4 / span 2;
     color:rgb(249, 227, 60);
-    font-size: large;
     background-color: black;
     border-radius: 50%;
     border: var(--bd-cell);
@@ -135,6 +138,7 @@ body {
     z-index: 10;
     font-family: 'Syncopate', sans-serif;
     font-weight: 700;
+    /* font-size: ; */
  }
  
  .color-button {
@@ -174,6 +178,36 @@ body {
     background-color: rgb(144, 144, 23);
     border-radius: 20px 20px 20px 320px;
  }
+
+ /* Exit Screen Styles */
+
+ #highscores{
+   grid-area: main;
+   border: 2px outset rgb(249, 227, 60);
+   justify-self: stretch;
+   align-self: stretch;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+ }
+
+ #reentry, #home{
+   font-family: var(--font);
+   color: rgb(249, 227, 60);
+   font-size: large;
+   background-color: black;
+   font-weight: 700;
+   text-align: center;
+   display: block;
+   width: fit-content;
+   margin: 2%;
+   padding: 1%;
+   justify-self: flex-end;
+ }
+
+
 
 /* Footer Styles */
 footer{

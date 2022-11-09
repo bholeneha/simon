@@ -24,6 +24,8 @@ const numOfHighScores = 5;
 //Using nullish coalescing operator to return an empty array if highScoreData doesnt exist in local storage
 const highScores = JSON.parse(localStorage.getItem("highScoreData")) ?? [];
 
+console.log(highScores)
+
 /*----- app's state (variables) -----*/
 let level, score, hasClicked;
 
@@ -34,7 +36,8 @@ const headingEl = document.getElementById('heading')
 
 //Divs
 const simonEl = document.getElementById('simon')
-const enterEl = document.getElementById('enter-exit')
+const enterEl = document.getElementById('enter-screen')
+const highscoresEl = document.getElementById('highscores')
 
 //Buttons
 const playBtn = document.getElementById('play')
@@ -69,16 +72,12 @@ function enterPlayScreen(e){
 
     //Hide and show relevant elements
     enterEl.classList.add('hidden')
+
     statsEl.classList.remove('hidden')
     messageEl.classList.remove('hidden')
     simonEl.classList.remove('hidden')
 
-
-
     player.name = document.getElementById('name').value
-
-
-
 }
 
 
@@ -199,7 +198,7 @@ function levelUp(){
     messageEl.innerHTML = "<h2>Correct!</h2><br><br> Great job!"
 
     //WIN INDICATOR ANIMATION
-    levelUpAnimation()
+    gameEventAnimation('playing')
 
     //Update Level, Score
     level++
@@ -218,30 +217,43 @@ function gameOver(){
         player.highScore = score
     }
     
+    //Checking High Score 
     let newHighScore = {name:player.name, highScore:player.highScore}
-
     checkHighScore(newHighScore, highScores)
 
     //LOSE INDICATOR ANIMATION
-    gameOverAnimation()
+    gameEventAnimation('gameover')
 
     //RESET LEVEL AND SCORE 
     level = 0;
     levelEl.textContent = ``
     score = 0;
     scoreEl.textContent = ``
+
     
     //Empty Simons Array and Players Array 
     simon.playOrder = [];
     player.playOrder = [];
-    
-    //Play Button Reset
-    playBtn.disabled = false;
 
+    //After a few seconds, display highscores screen
+    setTimeout(function(){
+        //Hide and show relevant elements
+        enterEl.classList.add('hidden')
+        statsEl.classList.add('hidden')
+        messageEl.classList.add('hidden')
+        simonEl.classList.add('hidden')
+
+        highscoresEl.classList.remove('hidden')
+    }, 2000)
+
+    
     //After a sec and and a half, initialize user message to original 
     setTimeout(function(){
+        //Play Button Reset
+        playBtn.disabled = false;
+        //Reset User Message 
         messageEl.innerHTML = "Click <h2>Simon</h2> to Play!"
-    }, 1500)
+    }, 3000)
 }
 
 /*----- All Animation Functions Go Here -----*/
@@ -277,54 +289,30 @@ function playAnimation(arr, i){
 }
 
 //Animation for Level Up 
-function levelUpAnimation() {
+function gameEventAnimation(gameEvent) {
     i = 0
     let animate = setInterval(function(){
         
-
         //Exit cb after 3 intervals
         if (i===3) {
             clearInterval(animate)
+        }
+        
+        //If gameEvent is game over, display message 
+        if (gameEvent ==="gameover"){
+            // Message to user for game over while game over animation
+            messageEl.innerHTML = "Uh oh. <h2>GAME OVER.</h2> <br><br> Restarting..." 
         }
 
         //Animation of the color buttons 
         colorDivs.forEach((div) => {
             //Start animation for the color button
-            div.classList.add('playing')
+            div.classList.add(`${gameEvent}`)
             //Play audio for the button
             
             //End animation for the color button
             setTimeout(function(){
-            div.classList.remove('playing')
-            }, 100)
-        })
-        i++;
-    }, 200
-)}
-
-//Animation for Game Over
-function gameOverAnimation(){
-    i = 0
-    let animateGameOver = setInterval(function(){
-       
-
-        //Exit cb after 3 intervals
-        if (i===3) {
-            clearInterval(animateGameOver)
-        }
-
-        //Message to user for game over while game over animation
-        messageEl.innerHTML = "Uh oh. <h2>GAME OVER.</h2> <br><br> Restarting..." 
-
-        //Animation of the color buttons
-        colorDivs.forEach((div) => {
-            //Start animation for the color button
-            div.classList.add('gameover')
-            //Play audio for the button
-            
-            //End animation for the color button
-            setTimeout(function(){
-            div.classList.remove('gameover')
+            div.classList.remove(`${gameEvent}`)
             }, 100)
         })
         i++;
@@ -341,7 +329,7 @@ function checkHighScore(newScore, highScoreList){
 
     if (newScore.highScore>lowestScore){
         saveHighScore(newScore, highScoreList);
-        // showHighScores(); //TODO
+        showHighScores(); 
     }
 }
 
@@ -358,5 +346,18 @@ function saveHighScore(score, scoreList){
 
     //Save to Local Storage
     localStorage.setItem('highScoresData', JSON.stringify(scoreList));
+
+    console.log(`printing the ${scoreList}`)
 }
 
+function showHighScores(){
+    const highScoresDisplay = document.createElement('ul')
+
+    highScores.forEach(score => {
+        const liEl = document.createElement('li')
+        liEl.innerHTML = score
+        highScoresDisplay.append(liEl)
+    })
+
+    highscoresEl.insertBefore(highScoresDisplay, highscoresEl.children[1])
+}
