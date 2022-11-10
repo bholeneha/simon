@@ -24,11 +24,9 @@ const numOfHighScores = 5;
 //Using nullish coalescing operator to return an empty array if highScoreData doesnt exist in local storage
 const highScores = JSON.parse(localStorage.getItem("highScoresData")) ?? [];
 
-console.log(highScores)
-
 /*----- audio -----*/
 //create web audio api context
-const audCtx = new(window.AudioContext || window.webkitAudioContext)();
+const audCtx = new(window.AudioContext || window.webkitAudioContext)()
 
 const audio = audCtx.createOscillator()
 audio.type = "sine"
@@ -37,11 +35,11 @@ const audioFrequencies = []
 
 audio.frequency.value = 200;
 
-const gainNode = audCtx.createGain();
-gainNode.gain.value = 0;
+const gainNode = audCtx.createGain()
+gainNode.gain.value = 0
 
-audio.connect(gainNode);
-gainNode.connect(audCtx.destination);
+audio.connect(gainNode)
+gainNode.connect(audCtx.destination)
 
 audio.start();
 
@@ -64,6 +62,7 @@ const headingEl = document.getElementById('heading')
 const simonEl = document.getElementById('simon')
 const enterEl = document.getElementById('enter-screen')
 const highscoresEl = document.getElementById('highscores')
+const highscoresListEl = document.getElementById('highscores-list')
 
 //Buttons
 const playBtn = document.getElementById('play')
@@ -119,8 +118,9 @@ function playSimon(){
     levelEl.textContent = `Level : ${level}`
     score = 0
     scoreEl.textContent = `Score : ${score}`
-    simon.playOrder = [];
-    player.playOrder = [];
+    simon.playOrder = []
+    player.playOrder = []
+    player.highScore = 0
 
     //Starting Simons Turn
     simonsTurn()
@@ -225,7 +225,7 @@ function levelUp(){
     //Update Level, Score
     level++
     levelEl.textContent = `Level : ${level}`
-    score+=10
+    score+=14
     scoreEl.textContent = `Score : ${score}`
     
     //Back to Simons Turn
@@ -238,8 +238,7 @@ function gameOver(){
     if (player.highScore<score || player.highScore == null){
         player.highScore = score
     }
-    
-    
+
     //Checking High Score 
     let newHighScore = {name:player.name, highScore:player.highScore}
     checkHighScore(newHighScore, highScores)
@@ -247,18 +246,7 @@ function gameOver(){
     //LOSE INDICATOR ANIMATION
     gameEventAnimation('gameover')
 
-    //RESET LEVEL AND SCORE 
-    level = 0;
-    levelEl.textContent = ``
-    score = 0;
-    scoreEl.textContent = ``
-
-    
-    //Empty Simons Array and Players Array 
-    simon.playOrder = [];
-    player.playOrder = [];
-
-    //After a few seconds, display highscores screen
+    //After a two seconds, display highscores screen
     setTimeout(function(){
         //Hide and show relevant elements
         enterEl.classList.add('hidden')
@@ -270,13 +258,28 @@ function gameOver(){
     }, 2000)
 
     
-    //After a sec and and a half, initialize user message to original 
+    //After three secs, initialize the game 
     setTimeout(function(){
+
+         //RESET LEVEL AND SCORE 
+        level = 0;
+        levelEl.textContent = ``
+        score = 0;
+        scoreEl.textContent = ``
+
+    
+        //Empty Simons Array and Players Array 
+        simon.playOrder = [];
+        player.playOrder = [];
+        
         //Play Button Reset
         playBtn.disabled = false;
+        
         //Reset User Message 
         messageEl.innerHTML = "Click <h2>Simon</h2> to Play!"
+
     }, 3000)
+
 }
 
 /*----- All Animation Functions Go Here -----*/
@@ -365,25 +368,21 @@ function checkHighScore(newScore, list){
 
         //Save to Local Storage
         localStorage.setItem('highScoresData', JSON.stringify(list));
-
-        showHighScores(list)
-    } else {
-        showHighScores(list)
     }
+    
+    showHighScores(list)
 }
 
 function showHighScores(list){
-    const highScoresDisplay = document.createElement('ul')
+    highscoresListEl.innerHTML = ""
 
     list.forEach(score => {
         if (score.highScore>0){
             const liEl = document.createElement('li')
             liEl.innerHTML = `<br>${score.name}: ${score.highScore}<br>`
-            highScoresDisplay.append(liEl)
+            highscoresListEl.append(liEl)
         }
     })
-
-    highscoresEl.insertBefore(highScoresDisplay, highscoresEl.children[1])
 }
 
 /*----- Exit Screen Related -----*/
@@ -412,5 +411,7 @@ function returnToHome(){
 
     //Showing
     enterEl.classList.remove('hidden')
+
+    //Resetting name input box
     nameInputBox.value = ""
 }

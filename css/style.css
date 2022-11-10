@@ -187,10 +187,10 @@ body {
    justify-self: stretch;
    align-self: stretch;
    text-align: center;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
+ }
+
+ #highscores>h2{
+   margin: 2%
  }
 
  #reentry, #home{
@@ -205,11 +205,17 @@ body {
    margin: 2%;
    padding: 1%;
    justify-self: flex-end;
+   display: inline-block;
  }
 
-#highscores>ul{
+#highscores-list{
    list-style: none;
    letter-spacing: 2px;
+   margin: 2%;
+}
+
+#highscores-list>li{
+   margin: 1%
 }
 
 
