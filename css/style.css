@@ -37,7 +37,7 @@ body {
 
 /* Header Styles */
 #heading {
-    grid-area: main;
+    grid-area: header;
     justify-self: center;
     align-self: center;
     animation-name: heading-animation;
@@ -207,6 +207,10 @@ body {
    justify-self: flex-end;
  }
 
+#highscores>ul{
+   list-style: none;
+   letter-spacing: 2px;
+}
 
 
 /* Footer Styles */

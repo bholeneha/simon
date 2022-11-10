@@ -22,9 +22,35 @@ const player = {
 const numOfHighScores = 5;
 
 //Using nullish coalescing operator to return an empty array if highScoreData doesnt exist in local storage
-const highScores = JSON.parse(localStorage.getItem("highScoreData")) ?? [];
+const highScores = JSON.parse(localStorage.getItem("highScoresData")) ?? [];
 
 console.log(highScores)
+
+/*----- audio -----*/
+//create web audio api context
+const audCtx = new(window.AudioContext || window.webkitAudioContext)();
+
+const audio = audCtx.createOscillator()
+audio.type = "sine"
+
+const audioFrequencies = []
+
+audio.frequency.value = 200;
+
+const gainNode = audCtx.createGain();
+gainNode.gain.value = 0;
+
+audio.connect(gainNode);
+gainNode.connect(audCtx.destination);
+
+audio.start();
+
+const audioFrequency = {
+    1: 125,
+    2: 225,
+    3: 325,
+    4: 425,
+}
 
 /*----- app's state (variables) -----*/
 let level, score, hasClicked;
@@ -42,6 +68,9 @@ const highscoresEl = document.getElementById('highscores')
 //Buttons
 const playBtn = document.getElementById('play')
 const enterBtn = document.getElementById('enter')
+const homeBtn = document.getElementById('home')
+const reentryBtn = document.getElementById('reentry')
+const nameInputBox = document.getElementById('name')
 
 //Stats Elements
 const statsEl = document.getElementById('stats')
@@ -53,10 +82,6 @@ const colorDivs = document.querySelectorAll('.color-button')
 const messageEl = document.getElementById('messages')
 
 
-/*----- Enter Screen State -----*/
-enterEl.prepend(headingEl)
-
-
 /*----- Enter Screen Event Listeners -----*/
 enterBtn.addEventListener('click', enterPlayScreen)
 
@@ -64,11 +89,9 @@ enterBtn.addEventListener('click', enterPlayScreen)
 /*----- Enter Screen Functions -----*/
 function enterPlayScreen(e){
 
-    //Header element moves to top
-    enterEl.removeChild(headingEl)
-    document.querySelector('body').prepend(headingEl)
-    headingEl.style.gridArea = 'header'
-
+    setTimeout(function(){
+        audio.stop()
+    }, 2000)
 
     //Hide and show relevant elements
     enterEl.classList.add('hidden')
@@ -77,7 +100,7 @@ function enterPlayScreen(e){
     messageEl.classList.remove('hidden')
     simonEl.classList.remove('hidden')
 
-    player.name = document.getElementById('name').value
+    player.name = nameInputBox.value
 }
 
 
@@ -111,7 +134,6 @@ function simonsTurn(){
     //Adding next color to Simon's array
     let num = Math.floor(Math.random()*4+1)
     simon.playOrder.push(colorCells[num])
-    console.log(simon.playOrder)
 
     //Animating Simon's array
     playAnimation(simon.playOrder, 0)
@@ -217,6 +239,7 @@ function gameOver(){
         player.highScore = score
     }
     
+    
     //Checking High Score 
     let newHighScore = {name:player.name, highScore:player.highScore}
     checkHighScore(newHighScore, highScores)
@@ -276,8 +299,10 @@ function playAnimation(arr, i){
 
           //Start animation for the color button
           divToAnimate.classList.add('playing')
-          //Play audio for the button
-          
+
+        //   //Play audio for the button
+        //   audio.resume()
+
           //End animation for the color button
           setTimeout( function(){
             divToAnimate.classList.remove('playing')
@@ -319,45 +344,73 @@ function gameEventAnimation(gameEvent) {
     }, 200
 )}
 
-/*----- High Score Related -----*/
+/*----- High Scores Related -----*/
 
-function checkHighScore(newScore, highScoreList){
-    
+function checkHighScore(newScore, list){
+
     //Using the Elvis operator and nullish operator to get the lowest score. 
     //If undefined, set to zero
-    const lowestScore = highScores[numOfHighScores-1]?.score ?? 0;
-
+    const lowestScore = list[numOfHighScores-1]?.score ?? 0;
+    
     if (newScore.highScore>lowestScore){
-        saveHighScore(newScore, highScoreList);
-        showHighScores(); 
+        
+        //ADD to the list
+        list.push(newScore);
+
+        //SORT the list
+        list.sort((a,b) => b.highScore - a.highScore);
+
+        //Select new list 
+        list.splice(numOfHighScores)
+
+        //Save to Local Storage
+        localStorage.setItem('highScoresData', JSON.stringify(list));
+
+        showHighScores(list)
+    } else {
+        showHighScores(list)
     }
 }
 
-function saveHighScore(score, scoreList){
-
-    //ADD to the list
-    scoreList.push(score);
-
-    //SORT the list
-    scoreList.sort((a,b) => b.highScore - a.highScore);
-
-    //Select new list 
-    scoreList.splice(numOfHighScores)
-
-    //Save to Local Storage
-    localStorage.setItem('highScoresData', JSON.stringify(scoreList));
-
-    console.log(`printing the ${scoreList}`)
-}
-
-function showHighScores(){
+function showHighScores(list){
     const highScoresDisplay = document.createElement('ul')
 
-    highScores.forEach(score => {
-        const liEl = document.createElement('li')
-        liEl.innerHTML = score
-        highScoresDisplay.append(liEl)
+    list.forEach(score => {
+        if (score.highScore>0){
+            const liEl = document.createElement('li')
+            liEl.innerHTML = `<br>${score.name}: ${score.highScore}<br>`
+            highScoresDisplay.append(liEl)
+        }
     })
 
     highscoresEl.insertBefore(highScoresDisplay, highscoresEl.children[1])
+}
+
+/*----- Exit Screen Related -----*/
+
+//Event Listeners
+reentryBtn.addEventListener('click', returnToSimon)
+homeBtn.addEventListener('click', returnToHome)
+
+function returnToSimon(){
+    //Hiding
+    highscoresEl.classList.add('hidden')
+    enterEl.classList.add('hidden')
+
+    //Showing
+    simonEl.classList.remove('hidden')
+    messageEl.classList.remove('hidden')
+    statsEl.classList.remove('hidden')
+}
+
+function returnToHome(){
+    //Hiding
+    highscoresEl.classList.add('hidden')
+    simonEl.classList.add('hidden')
+    messageEl.classList.add('hidden')
+    statsEl.classList.add('hidden')
+
+    //Showing
+    enterEl.classList.remove('hidden')
+    nameInputBox.value = ""
 }
