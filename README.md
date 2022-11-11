@@ -1,9 +1,6 @@
 # Simon
 
-## Description
-A game that tests your short term memory.
-
-### Background Info
+A game that tests ones short term memory. Player needs to remember the sequence of light and sounds while it gets longer every level. 
 
 ## First Look
 
@@ -36,6 +33,8 @@ A game that tests your short term memory.
 
 To play, click here: [Simon](https://bholeneha.github.io/simon/)
 
+### How to Play
+
 - Enter your name or alias in the input box and click enter.
 - Click the simon button in the center of the color tabs to start. 
 - Wait, watch and remember Simon's order of color and sounds. 
@@ -48,3 +47,4 @@ To play, click here: [Simon](https://bholeneha.github.io/simon/)
 - Add buttons on/off, speed selector 
 - Add sounds for game over and level up
 - Add buttons to turn simon on and off, choose speed, and number of colors and tones
+- Make it responsive 
