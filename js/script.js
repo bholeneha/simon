@@ -116,6 +116,9 @@ function simonsTurn(){
     //Message to user to wait for Simon to finish
     messageEl.innerHTML = "<h2>Simon's turn!</h2> <br><br> Wait, watch and remember the order."
 
+    //Reset players array
+    player.playOrder = []
+
     //Adding next color to Simon's array
     let num = Math.floor(Math.random()*4+1)
     simon.playOrder.push(colorCells[num])
@@ -123,9 +126,8 @@ function simonsTurn(){
     //Animating Simon's array
     playAnimation(simon.playOrder, 0)
 
-    //Setting players array to empty  
-    player.playOrder = []
-
+    console.log(simon.playOrder.length)
+    
     //Triggering players turn after certain time 
     setTimeout(playersTurn, simon.playOrder.length*1000)
 }
@@ -218,14 +220,12 @@ function levelUp(){
     levelEl.textContent = `Level : ${level}`
     score+=14
     scoreEl.textContent = `Score : ${score}`
-    
+
     //Back to Simons Turn
     setTimeout (simonsTurn, 2000)
 }
 
 function gameOver(){
-
-    audio.stop()
 
     //Saving score as high score or the current player
     if (player.highScore<score || player.highScore == null){
@@ -248,11 +248,7 @@ function gameOver(){
         simonEl.classList.add('hidden')
 
         highscoresEl.classList.remove('hidden')
-    }, 2000)
 
-    
-    //After three secs, initialize the game 
-    setTimeout(function(){
 
          //RESET LEVEL AND SCORE 
         level = 0;
@@ -271,7 +267,7 @@ function gameOver(){
         //Reset User Message 
         messageEl.innerHTML = "Click <h2>Simon</h2> to Play!"
 
-    }, 3000)
+    }, 2000)
 
 }
 
@@ -329,10 +325,10 @@ function gameEventAnimation(gameEvent) {
 
         //Animation of the color buttons 
         colorDivs.forEach((div) => {
+            
             //Start animation for the color button
             div.classList.add(`${gameEvent}`)
-            //Play audio for the button
-            
+
             //End animation for the color button
             setTimeout(function(){
             div.classList.remove(`${gameEvent}`)
@@ -412,4 +408,7 @@ function returnToHome(){
 
     //Resetting name input box
     nameInputBox.value = ""
+
+    //Resume Audio Context
+    audCtx.resume()
 }
