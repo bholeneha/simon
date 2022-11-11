@@ -25,29 +25,16 @@ const numOfHighScores = 5;
 const highScores = JSON.parse(localStorage.getItem("highScoresData")) ?? [];
 
 /*----- audio -----*/
-//create web audio api context
-const audCtx = new(window.AudioContext || window.webkitAudioContext)()
 
+const audCtx = new (window.AudioContext || window.webkitAudioContext)()
 const audio = audCtx.createOscillator()
-audio.type = "sine"
+audio.start()
 
-const audioFrequencies = []
-
-audio.frequency.value = 200;
-
-const gainNode = audCtx.createGain()
-gainNode.gain.value = 0
-
-audio.connect(gainNode)
-gainNode.connect(audCtx.destination)
-
-audio.start();
-
-const audioFrequency = {
-    1: 125,
-    2: 225,
-    3: 325,
-    4: 425,
+const frequencies = {
+    'red': 125,
+    'blue': 225,
+    'green': 325,
+    'yellow': 425,
 }
 
 /*----- app's state (variables) -----*/
@@ -88,9 +75,7 @@ enterBtn.addEventListener('click', enterPlayScreen)
 /*----- Enter Screen Functions -----*/
 function enterPlayScreen(e){
 
-    setTimeout(function(){
-        audio.stop()
-    }, 2000)
+    audCtx.resume()
 
     //Hide and show relevant elements
     enterEl.classList.add('hidden')
@@ -179,11 +164,17 @@ function checkClick(e) {
         
         //Animating the target clicked
         colorClicked.classList.add('playing')
-            // End animation for the div
-            setTimeout( function(){
-                e.target.classList.remove('playing')
-            }, 500)
-        
+
+        //Play Audio
+        audio.frequency.value = frequencies[colorClicked.id]
+        audio.connect(audCtx.destination)
+
+        // End animation and audio for the div
+        setTimeout( function(){
+            e.target.classList.remove('playing')
+            audio.disconnect(audCtx.destination)
+        }, 500)
+    
         //Flag for user response set to true
         hasClicked = true;
        
@@ -233,6 +224,8 @@ function levelUp(){
 }
 
 function gameOver(){
+
+    audio.stop()
 
     //Saving score as high score or the current player
     if (player.highScore<score || player.highScore == null){
@@ -290,28 +283,30 @@ function playAnimation(arr, i){
         function(){
 
         //Exit cb function if index is undefined 
-          if (i==arr.length-1) {
-            clearInterval(animate)
-          }
+        if (i==arr.length-1) {
+        clearInterval(animate)
+        }
 
-          let cellColor = arr[i] 
+        let cellColor = arr[i] 
 
-          //Grab the corresponding div to animate
-          let divToAnimate = document.getElementById(cellColor)
-          divToAnimate.style.backgroundColor = cellColor
+        //Grab the corresponding div to animate
+        let divToAnimate = document.getElementById(cellColor)
+        divToAnimate.style.backgroundColor = cellColor
 
-          //Start animation for the color button
-          divToAnimate.classList.add('playing')
+        //  Play audio for the button
+        audio.frequency.value = parseFloat(frequencies[cellColor])
+        audio.connect(audCtx.destination)
 
-        //   //Play audio for the button
-        //   audio.resume()
+        //Start animation for the color button
+        divToAnimate.classList.add('playing')
 
-          //End animation for the color button
-          setTimeout( function(){
-            divToAnimate.classList.remove('playing')
-          }, 500)
-          
-          i++
+        //End animation for the color button
+        setTimeout( function(){
+        divToAnimate.classList.remove('playing')
+        audio.disconnect(audCtx.destination)
+        }, 500)
+        
+        i++
         }
       , 700)
 }
@@ -400,6 +395,9 @@ function returnToSimon(){
     simonEl.classList.remove('hidden')
     messageEl.classList.remove('hidden')
     statsEl.classList.remove('hidden')
+
+    //Resume Audio Context
+    audCtx.resume()
 }
 
 function returnToHome(){
