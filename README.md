@@ -1,6 +1,6 @@
 # Simon
 
-A game that tests ones short term memory. Player needs to remember the sequence of light and sounds while it gets longer every level. 
+Introducing a fun and engaging web browser game that puts your short-term memory to the test! With each level, the sequence of light and sounds becomes longer, challenging players to remember and repeat the pattern. Developed using HTML, CSS, and JavaScript, this game is sure to provide hours of entertainment while also sharpening your memory skills. Give it a try and see how far you can go!
 
 ## First Look
 
