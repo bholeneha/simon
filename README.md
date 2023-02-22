@@ -6,7 +6,6 @@ Timeline: 6 days
 
 🕹️ [<b>Try Simon</b>](https://bholeneha.github.io/simon/) 
 
-<br>
 
 * * *
 
@@ -33,19 +32,16 @@ Timeline: 6 days
   - [Contributors](#contributors)
   - [Author Information](#author-information)
 
-<br>
 
 * * *
 
 ## Overview 
 
-<br>
 
 <b>Simon</b> is a classic, fun and engaging web browser game that puts your short-term memory to the test! With each level, the sequence of light and sounds becomes longer, challenging players to remember and repeat the pattern. Developed using HTML, CSS, and JavaScript, this game is sure to provide hours of entertainment while also sharpening your memory skills. Give it a try and see how far you can go!
 
 Built in 7 days, I chose to build this game to get a better a understanding of asynchronous functions. 
 
-<br>
 
 ### <b>First Look</b>
 
@@ -67,27 +63,17 @@ Game Over Indicator
 Simons Turn
 ![Simons Turn](img/simonturn.png)
 
-<br>
-
 [Back To The Top](#Simon)
-
-<br>
 
 * * *
 
 ## Getting Started
 
-<br>
-
 To play, click here: [Simon](https://bholeneha.github.io/simon/)
-
-<br>
 
 ### Requirements
 
 Simon is a desktop only game and can only be played on a web browser using the mouse. No installations required. 
-
-<br>
 
 ### How to Play
 
@@ -98,30 +84,22 @@ Simon is a desktop only game and can only be played on a web browser using the m
 - Remember, you get 5 seconds to respond once its your turn!
 - If your order matches Simon's, you level up. 
 - If you make a mistake or dont wait for Simon to finish his turn, game over. 
-  
-<br>
 
 [Back To The Top](#Simon)
-
-<br>
 
 * * *
 
 ## Development Process
 
-<br>
-
 ### Timeframe & Working Team
-<u>Timeframe:</u>
+Timeframe:
 
 This project was built in 6 days. 
 
-<u>Team:</u>
+Team:
 
 This is a solo project built by: 
   <b>Neha Bhole</b> [📨](mailto:nehasbhole@gmail.com)
-
-<br>
 
 ### Technologies Used
 Technologies used for this project are: 
@@ -130,29 +108,30 @@ Technologies used for this project are:
 - JavaScript
 - Deployed on GitHub Pages 
 
-<br>
 
 ### Planning Process
 #### Brief 
 #### Sketches   
 #### Project Management 
 
-<br>
+[Back To The Top](#Simon)
 
 ### Build/Code Process
-<br>
 
+
+[Back To The Top](#Simon)
 ### Challenges
 
-<br>
+
 
 ### Wins
 
-<br>
 
+
+[Back To The Top](#Simon)
 ### Key Learning
 
-<br>
+
 
 ### Future Features 
 - Add buttons on/off, speed selector 
