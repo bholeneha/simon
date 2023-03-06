@@ -137,13 +137,13 @@ class SimonGame {
   playersTurn() {
 
     //Message to user to respond
-    messageEl.innerHTML = "<h2>Your turn! </h2> <br><br> Click the colors to copy Simon. <br><br>(You have 5 seconds to respond)"
+    this.messageEl.innerHTML = "<h2>Your turn! </h2> <br><br> Click the colors to copy Simon. <br><br>(You have 5 seconds to respond)"
 
     //Flag to see if user has clicked 
-    hasClicked = false;
+    this.hasClicked = false;
 
     //Event Listener is added so user can play their turn
-    simonEl.addEventListener('click', checkClick)
+    this.simonEl.addEventListener('click', checkClick)
 
     //User gets 5 seconds to click or game over
     let timer = setTimeout(function () {

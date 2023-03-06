@@ -1,0 +1,25 @@
+{
+  "name": "simon",
+  "version": "1.0.0",
+  "description": "Introducing a fun and engaging web browser game that puts your short-term memory to the test! With each level, the sequence of light and sounds becomes longer, challenging players to remember and repeat the pattern. Developed using HTML, CSS, and JavaScript, this game is sure to provide hours of entertainment while also sharpening your memory skills. Give it a try and see how far you can go!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bholeneha/simon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bholeneha/simon/issues"
+  },
+  "homepage": "https://github.com/bholeneha/simon#readme",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  },
+  "dependencies": {
+    "jest-environment-jsdom": "^29.5.0"
+  }
+}
