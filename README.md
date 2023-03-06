@@ -20,10 +20,12 @@ Timeline: 6 days
   - [Development Process](#development-process)
     - [Timeframe \& Working Team](#timeframe--working-team)
     - [Technologies Used](#technologies-used)
+    - [Brief](#brief)
     - [Planning Process](#planning-process)
-      - [Brief](#brief)
       - [Sketches](#sketches)
+      - [Wireframes](#wireframes)
       - [Project Management](#project-management)
+      - [Pseudocode](#pseudocode)
     - [Build/Code Process](#buildcode-process)
     - [Challenges](#challenges)
     - [Wins](#wins)
@@ -40,7 +42,7 @@ Timeline: 6 days
 
 <b>Simon</b> is a classic, fun and engaging web browser game that puts your short-term memory to the test! With each level, the sequence of light and sounds becomes longer, challenging players to remember and repeat the pattern. Developed using HTML, CSS, and JavaScript, this game is sure to provide hours of entertainment while also sharpening your memory skills. Give it a try and see how far you can go!
 
-Built in 7 days, I chose to build this game to get a better a understanding of asynchronous functions. 
+Built in 6 days, I chose to build this game to get a better a understanding of asynchronous functions. 
 
 
 ### <b>First Look</b>
@@ -109,10 +111,19 @@ Technologies used for this project are:
 - Deployed on GitHub Pages 
 
 
+### Brief 
 ### Planning Process
-#### Brief 
-#### Sketches   
+#### Sketches
+#### Wireframes 
 #### Project Management 
+
+#### Pseudocode
+
+This is the link to the pseucocode file: [Pseudocode](pseudocode.txt) 
+
+Below is a screenshot of the pseudocode. This pseudocode was written on the first day of the project.
+
+![Pseudocode](img/pseudocode.png) 
 
 [Back To The Top](#Simon)
 
@@ -120,6 +131,7 @@ Technologies used for this project are:
 
 
 [Back To The Top](#Simon)
+
 ### Challenges
 
 
