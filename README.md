@@ -9,9 +9,7 @@ Timeline: 6 days
 
 * * *
 
-### Table of Contents
-- [Simon](#simon)
-    - [Table of Contents](#table-of-contents)
+## Table of Contents
   - [Overview](#overview)
     - [First Look](#first-look)
   - [Getting Started](#getting-started)
@@ -23,7 +21,7 @@ Timeline: 6 days
     - [Planning Process](#planning-process)
       - [Brief](#brief)
       - [Sketches](#sketches)
-      - [Project Management](#project-management)
+      - [Pseudocode](#pseudocode)
     - [Build/Code Process](#buildcode-process)
     - [Challenges](#challenges)
     - [Wins](#wins)
@@ -45,23 +43,7 @@ Built in 7 days, I chose to build this game to get a better a understanding of a
 
 ### <b>First Look</b>
 
-Landing Screen
-![Landing Screen](img/enter-screen.png) 
-
-Game Screen
-![Simon Screen](img/simon-screen.png)
-
-High Scores Screen
-![High Scores Screen](img/highscores-screen.png)
-
-Level Up Indicator
-![Level Up Animation](img/levelup.png)
-
-Game Over Indicator 
-![Game Over Animation](img/gameover.png)
-
-Simons Turn
-![Simons Turn](img/simonturn.png)
+![Simon First Look](img/simon.gif) 
 
 [Back To The Top](#Simon)
 
@@ -92,14 +74,15 @@ Simon is a desktop only game and can only be played on a web browser using the m
 ## Development Process
 
 ### Timeframe & Working Team
-Timeframe:
+
+<strong>Timeframe:</strong>
 
 This project was built in 6 days. 
 
-Team:
 
-This is a solo project built by: 
-  <b>Neha Bhole</b> [📨](mailto:nehasbhole@gmail.com)
+<strong>Team:</strong>
+
+This is a solo project built by: <b>Neha Bhole</b> [📨](mailto:nehasbhole@gmail.com)
 
 ### Technologies Used
 Technologies used for this project are: 
@@ -107,16 +90,27 @@ Technologies used for this project are:
 - CSS 
 - JavaScript
 - Deployed on GitHub Pages 
-
+- Node.js and Jest used for testing
 
 ### Planning Process
 #### Brief 
-#### Sketches   
-#### Project Management 
+Project Requirements:
+- Render a game in the browser.
+- Include win/loss logic and render win/loss messages in HTML.
+- Include separate HTML, CSS & JavaScript files.
+- Deploy game online using GitHub Pages.
 
-[Back To The Top](#Simon)
+#### Sketches   
+Wireframe was hand drawn for this project. 
+![WireFrame](img/wireframe.png)
+
+#### Pseudocode 
+Pseudocode can be found here: [Simon Pseudocode](pseudocode.txt)
+Below is a screenshot of the pseudocode. 
+![Pseudocode](img/pseudocode.png)
 
 ### Build/Code Process
+
 
 
 [Back To The Top](#Simon)
