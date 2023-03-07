@@ -1,9 +1,12 @@
 /**
  * @jest-environment jsdom
  */
-const { createGame } = require("./script");
+//const { SimonGame } = require("./script");
 
 describe("Script", () => {
+
+  let game;
+
   const mockcreateOscillator = jest.fn(() => {
     return {
       channelCount: 2,
@@ -21,7 +24,7 @@ describe("Script", () => {
     });
     window.AudioContext = mockaudioContext;
 
-    createGame();
+    game = new SimonGame();
   });
 
   describe("Enter Play Screen Function", () => {
