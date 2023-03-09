@@ -116,8 +116,12 @@ body {
 }
 
 /* Simon/Play Screen Styles */
-#simon {
+
+main {
    grid-area: main;
+}
+
+#simon {
    aspect-ratio: 1;
    display: grid;
    grid-template: repeat(8, 12.5%) / repeat(8, 12.5%);
