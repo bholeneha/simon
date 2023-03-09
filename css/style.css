@@ -6,51 +6,41 @@
    --font: 'Syncopate', sans-serif;
 }
 
-/* Animations */
-/* @keyframes heading-animation {
-   from{
-      grid-area: main;
-   }
-   to {
-      grid-area: header;
-   }
-} */
-
 /* Body Styles */
 body {
    display: grid;
    grid-template-rows: 20% 60% 15% 5%;
    grid-template-columns: 15% 70% 15%;
-   grid-template-areas:  
-        ". header ." 
-        ". main ." 
-        ". messages ."
-        ". footer .";
+   grid-template-areas:
+      ". header ."
+      ". main ."
+      ". messages ."
+      ". footer .";
    justify-items: center;
-   background-color:#191b1d;
-   width: 100vw;
+   background-color: #191b1d;
+   width: 100%;
    height: 100vh;
    font-family: var(--font);
    font-weight: 700;
-   color:rgb(249, 227, 60);
+   color: rgb(249, 227, 60);
 }
 
 /* Header Styles */
 #heading {
-    grid-area: header;
-    justify-self: center;
-    align-self: center;
-    animation-name: heading-animation;
-    animation-duration: 5s;
+   grid-area: header;
+   justify-self: center;
+   align-self: center;
+   animation-name: heading-animation;
+   animation-duration: 5s;
 }
 
 #heading>h1 {
-    text-align: center;
-    color: rgb(249, 227, 60);
-    text-shadow: 4px 4px 6px rgb(179, 131, 11);
-    letter-spacing: 10px;
-    font-size: 50px;
-    font-weight: 700;
+   text-align: center;
+   color: rgb(249, 227, 60);
+   text-shadow: 4px 4px 6px rgb(179, 131, 11);
+   letter-spacing: 10px;
+   font-size: 50px;
+   font-weight: 700;
 }
 
 /* Enter Screen Styles */
@@ -77,7 +67,7 @@ body {
 }
 
 #name {
-   color:rgb(249, 227, 60);
+   color: rgb(249, 227, 60);
    background-color: black;
    width: fit-content;
    font-size: medium;
@@ -87,7 +77,7 @@ body {
    text-align: center;
 }
 
-#enter{
+#enter {
    font-family: var(--font);
    color: rgb(249, 227, 60);
    font-size: large;
@@ -110,7 +100,7 @@ body {
    align-items: flex-end;
 }
 
-#messages{ 
+#messages {
    grid-area: messages;
    align-self: start;
    justify-self: center;
@@ -121,79 +111,80 @@ body {
 
 /* Simon/Play Screen Styles */
 #simon {
-    grid-area: main;
-    aspect-ratio: 1;
-    display: grid;
-    grid-template: repeat(8, 12.5%) / repeat(8, 12.5%);
- }
+   grid-area: main;
+   aspect-ratio: 1;
+   display: grid;
+   grid-template: repeat(8, 12.5%) / repeat(8, 12.5%);
+}
 
- #play { 
-    grid-column: 4 / span 2;
-    grid-row: 4 / span 2;
-    color:rgb(249, 227, 60);
-    background-color: black;
-    border-radius: 50%;
-    border: var(--bd-cell);
-    box-shadow: var(--cell-shadow);
-    z-index: 10;
-    font-family: 'Syncopate', sans-serif;
-    font-weight: 700;
-    /* font-size: ; */
- }
- 
- .color-button {
+#play {
+   grid-column: 4 / span 2;
+   grid-row: 4 / span 2;
+   color: rgb(249, 227, 60);
+   background-color: black;
+   border-radius: 50%;
+   border: var(--bd-cell);
+   box-shadow: var(--cell-shadow);
+   z-index: 10;
+   font-family: 'Syncopate', sans-serif;
+   font-weight: 700;
+   /* font-size: ; */
+}
+
+.color-button {
    border: var(--bd-around);
    border-top: var(--bd-cell);
    border-left: var(--bd-cell);
-   box-shadow: var(--cell-shadow); 
+   box-shadow: var(--cell-shadow);
    transition: all .10s ease;
    z-index: 8;
    filter: brightness(40%);
- }
+}
 
- #red { 
-    grid-column: 2 / span 3;
-    grid-row: 2 /span 3;
-    background-color: darkred;
-    border-radius: 320px 20px 20px 20px;  
- }
+#red {
+   grid-column: 2 / span 3;
+   grid-row: 2 /span 3;
+   background-color: darkred;
+   border-radius: 320px 20px 20px 20px;
+}
 
- #blue { 
+#blue {
    grid-column: 5 / span 3;
    grid-row: 2 /span 3;
    background-color: darkblue;
    border-radius: 20px 320px 20px 20px;
 }
 
- #green { 
-    grid-column: 5 / span 3;
-    grid-row: 5 /span 3;
-    background-color: darkgreen;
-    border-radius: 20px 20px 320px 20px;
- }
+#green {
+   grid-column: 5 / span 3;
+   grid-row: 5 /span 3;
+   background-color: darkgreen;
+   border-radius: 20px 20px 320px 20px;
+}
 
- #yellow { 
-    grid-column: 2 / span 3;
-    grid-row: 5 /span 3;
-    background-color: rgb(144, 144, 23);
-    border-radius: 20px 20px 20px 320px;
- }
+#yellow {
+   grid-column: 2 / span 3;
+   grid-row: 5 /span 3;
+   background-color: rgb(144, 144, 23);
+   border-radius: 20px 20px 20px 320px;
+}
 
- /* Exit Screen Styles */
+/* Exit Screen Styles */
 
- #highscores{
+#highscores {
    grid-area: main;
    border: 2px outset rgb(249, 227, 60);
    justify-self: stretch;
    align-self: stretch;
    text-align: center;
- }
+}
 
- #highscores>h2{
+#highscores>h2 {
    margin: 2%
- }
+}
 
- #reentry, #home{
+#reentry,
+#home {
    font-family: var(--font);
    color: rgb(249, 227, 60);
    font-size: large;
@@ -206,22 +197,22 @@ body {
    padding: 1%;
    justify-self: flex-end;
    display: inline-block;
- }
+}
 
-#highscores-list{
+#highscores-list {
    list-style: none;
    letter-spacing: 2px;
    margin: 2%;
 }
 
-#highscores-list>li{
+#highscores-list>li {
    margin: 1%
 }
 
 
 /* Footer Styles */
-footer{
-   font-family:Arial, Helvetica, sans-serif;
+footer {
+   font-family: Arial, Helvetica, sans-serif;
    grid-area: footer;
    align-self: end;
    justify-self: center;
@@ -230,7 +221,7 @@ footer{
    font-weight: 100;
 }
 
-footer>a{
+footer>a {
    color: rgb(157, 158, 112);
    text-decoration: none;
 }
@@ -253,7 +244,6 @@ footer>a{
    color: grey;
 }
 
-.hidden{
+.hidden {
    visibility: hidden;
 }
-
