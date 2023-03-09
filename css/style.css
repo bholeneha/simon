@@ -6,6 +6,12 @@
    --font: 'Syncopate', sans-serif;
 }
 
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
 /* Body Styles */
 body {
    display: grid;
@@ -247,3 +253,5 @@ footer>a {
 .hidden {
    visibility: hidden;
 }
+
+@media screen and (max-width: 45rem) {}
