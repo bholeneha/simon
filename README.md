@@ -10,6 +10,8 @@ Timeline: 6 days
 * * *
 
 ## Table of Contents
+- [Simon](#simon)
+  - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
     - [First Look](#first-look)
   - [Getting Started](#getting-started)
@@ -23,9 +25,7 @@ Timeline: 6 days
       - [Sketches](#sketches)
       - [Pseudocode](#pseudocode)
     - [Build/Code Process](#buildcode-process)
-    - [Challenges](#challenges)
-    - [Wins](#wins)
-    - [Key Learning](#key-learning)
+    - [Challenges/Wins/Key Learning](#challengeswinskey-learning)
     - [Future Features](#future-features)
   - [Contributors](#contributors)
   - [Author Information](#author-information)
@@ -75,14 +75,10 @@ Simon is a desktop only game and can only be played on a web browser using the m
 
 ### Timeframe & Working Team
 
-<strong>Timeframe:</strong>
-
-This project was built in 6 days. 
+<strong>Timeframe:</strong> This project was built in 6 days. 
 
 
-<strong>Team:</strong>
-
-This is a solo project built by: <b>Neha Bhole</b> [📨](mailto:nehasbhole@gmail.com)
+<strong>Team:</strong> This is a solo project built by: <b>Neha Bhole</b> [📨](mailto:nehasbhole@gmail.com)
 
 ### Technologies Used
 Technologies used for this project are: 
@@ -110,24 +106,25 @@ Below is a screenshot of the pseudocode.
 ![Pseudocode](img/pseudocode.png)
 
 ### Build/Code Process
+To create Simon, I started by designing and building the user interface using HTML and CSS. I wanted to create a simple interface that would allow players to easily interact with the game and focus on the challenge of remembering and repeating the patterns of colors and sounds.
 
-
-
-[Back To The Top](#Simon)
-### Challenges
-
-
-
-### Wins
-
-
+Once the UI was in place, I began working on the JavaScript functions that would respond to user interaction and control the game logic. This included implementing the game's core functionality, such as generating random patterns of colors and sounds, recognizing when the player had made a mistake, and displaying win/loss messages to the player.
 
 [Back To The Top](#Simon)
-### Key Learning
+### Challenges/Wins/Key Learning
 
+During the development process of Simon, one of the main challenges I faced was implementing the logic for the game to recognize when the player had made a mistake and respond accordingly. This required me to carefully consider the timing and sequence of the game's interactions.
 
+One of the key wins of this project was the successful implementation of asynchronous functions, which allowed the game to run smoothly and respond quickly to user input. 
+
+Overall, building Simon was a challenging but rewarding experience that helped me to develop my skills in HTML, CSS, JavaScript and particularly async functions.
+
+[Back To The Top](#Simon)
 
 ### Future Features 
+Although there are several future improvements and features that could be added to this project, I will not be working on further development at this time. As my first project in the bootcamp, I wanted to showcase what I could build in a week and demonstrate my skills in HTML, CSS, and JavaScript.
+
+That being said, here are some ideas for future improvements and features that could be added to the game:
 - Add buttons on/off, speed selector 
 - Add sounds for game over and level up
 - Add buttons to turn simon on and off, choose speed, and number of colors and tones
